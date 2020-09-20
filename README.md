@@ -1,2 +1,3 @@
 # CEN-Chile
-Sistema interconectado central - Chile
+
+Prueba de la API del Coordinador Eléctrico Nacional. 

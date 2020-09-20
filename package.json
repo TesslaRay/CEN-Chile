@@ -1,0 +1,23 @@
+{
+  "name": "cen-chile",
+  "version": "1.0.0",
+  "description": "Uso de la API del CEN",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TesslaRay/CEN-Chile.git"
+  },
+  "author": "CristianValdivia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TesslaRay/CEN-Chile/issues"
+  },
+  "homepage": "https://github.com/TesslaRay/CEN-Chile#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
+}
