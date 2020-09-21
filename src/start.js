@@ -1,4 +1,4 @@
-const ioledAPI = require("./index.js");
+const CENAPI = require("./index.js");
 
 const PORT = process.env.PORT;
 
@@ -7,6 +7,6 @@ if (PORT === undefined) {
   process.exit(1);
 }
 
-ioledAPI.listen(PORT, () => {
+CENAPI.listen(PORT, () => {
   console.log("Listening on port", PORT);
 });
