@@ -1,5 +1,3 @@
-const https = require('https');
-
 const axios = require('axios');
 const { AUTH_KEY } = require("../config/env");
 
