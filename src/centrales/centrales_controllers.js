@@ -1,8 +1,4 @@
-const axios = require('axios');
-const { AUTH_KEY } = require("../config/env");
-
-const URL_centrales = 'https://api-desarrolladores.coordinador.cl/generacion-bruta-real/v1/generacion-bruta-real.json/?auth_key='
-const URL_central = 'https://api-desarrolladores.coordinador.cl/generacion-bruta-real/v1/generacion-bruta-reales/'
+const cenService = require('../services/centrales');
 
 /**
  * Return gross generation of CEN
@@ -12,17 +8,16 @@ const URL_central = 'https://api-desarrolladores.coordinador.cl/generacion-bruta
  */
 exports.getCentralesGen = async (req, res)  => {
   const params = req.body;
-  console.log("[getCentralesGen][Request]", params);
-  
-  let data;
-  await axios.get(`${URL_centrales}${AUTH_KEY}`, { params: params }).then(result => {
-    data = result.data;
-  }).catch(err => {
-    console.log(err.code);
-  });
 
-  console.log("[getCentralesGen][Res]", data.generacionBruta);
-  res.status(200).json(data.generacionBruta);
+  console.log('[getCentralesGen][Request]' );
+  try {
+    const genCentrales = await cenService.getGenCentrales(params.fecha, params.limite, params.offset);
+    console.log('[getCentralesGen][Res] ', genCentrales);
+    res.status(200).json({data: genCentrales});
+  } catch (err) {
+    console.log('[getCentralesGen][Error] ', err);
+    res.status(500).send({err});
+  }
 };
 
 
@@ -35,17 +30,16 @@ exports.getCentralesGen = async (req, res)  => {
  */
 exports.getCentralGen = async (req, res, next)  => {
   const params = req.body;
-  console.log("[getCentralGen][Request]", params);
-  
-  let data;
-  await axios.get(`${URL_central}${params.idcentral}.json/?auth_key=${AUTH_KEY}`, { params: params }).then(result => {
-    data = result.data;
-  }).catch(err => {
-    console.log(err.code);
-  });
 
-  console.log("[getCentralGen][Res]", data.generacionBruta);
-  res.status(200).json(data.generacionBruta);
+  console.log('[getCentralGen][Request]' );
+  try {
+    const genCentral = await cenService.getGenCentral(params.fecha, params.idcentral);
+    console.log('[getCentralGen][Res] ', genCentral);
+    res.status(200).json({data: genCentral});
+  } catch (err) {
+    console.log('[getCentralGen][Error] ', err);
+    res.status(500).send({err});
+  }
 };
 
 

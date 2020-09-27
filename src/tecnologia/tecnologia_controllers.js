@@ -1,10 +1,15 @@
 const cenService = require('../services/centrales');
 
 exports.getTech = async (req, res) => {
-  console.log("[getTech][Request]");
-  const genCentral = await cenService.getGenCentral("2020-09-22", 127);
-  console.log(genCentral);
-  console.log("[getTech][Res]");
+  console.log('[getTech][Request]' );
+  try {
+    const genCentral = await cenService.getGenCentral("2020-09-22", 127);
+    console.log('[getTech][Res] ', genCentral);
+    res.status(200).json({data: data});
+  } catch (err) {
+    console.log('[getTech][Error] ', error);
+    res.status(500).send({err});
+  }
 }
 
 
