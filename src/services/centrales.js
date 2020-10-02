@@ -11,7 +11,6 @@ exports.getGenCentrales = async (fecha, limite, offset) => {
                 "limite": limite,
                 "offset": offset
               };
-
   let data;
   try { 
     await axios.get(`${URL_centrales}${AUTH_KEY}`, { params: params }).then(result => {
@@ -33,6 +32,7 @@ exports.getGenCentral = async (fecha, idcentral) => {
               };
 
   let data;
+
   try { 
     await axios.get(`${URL_central}${idcentral}.json/?auth_key=${AUTH_KEY}`, { params: params }).then(result => {
       data = result.data;

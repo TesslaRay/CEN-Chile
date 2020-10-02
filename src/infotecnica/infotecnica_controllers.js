@@ -1,7 +1,6 @@
-const axios = require('axios');
-const { AUTH_KEY } = require("../config/env");
+const cenServiceCentral = require('../services/centrales');
+const cenServiceInfo = require('../services/infotecnica');
 
-const URL_centrales_info = 'https://api-desarrolladores.coordinador.cl/infotecnica/v1/centrales.json/?auth_key='
 
 /**
  * Return information technique
@@ -9,19 +8,17 @@ const URL_centrales_info = 'https://api-desarrolladores.coordinador.cl/infotecni
  * @param {number} idinfotecnica Numeric id in infotecnica
  * @return  {object} HTTP status code - 200, 500.
  */
-exports.getCentralesInfo = async (req, res)  => {
+exports.getCentralInfo = async (req, res)  => {
   const params = req.body;
-  console.log("[getCentralesInfo][Request]", params);
-  
-  let data;
-  await axios.get(`${URL_centrales_info}${AUTH_KEY}`, { params: params }).then(result => {
-    data = result.data;
-  }).catch(err => {
-    console.log(err.code);
-  });
 
-  console.log("[getCentralesGen][Res]", data.result);
-  res.status(200).json(data.result);
+  console.log('[getCentralInfo][Request]' );
+  try {
+    const centralInfo = await cenServiceInfo.getCentralInfo(params.idinfotecnica);
+    res.status(200).json({data: centralInfo});
+  } catch (err) {
+    console.log('[getCentralInfo][Error] ', err);
+    res.status(500).send({err});
+  }
 };
 
 

@@ -1,4 +1,4 @@
-const cenService = require('../services/centrales');
+const cenServiceCentral = require('../services/centrales');
 
 /**
  * Return gross generation of CEN
@@ -11,7 +11,7 @@ exports.getCentralesGen = async (req, res)  => {
 
   console.log('[getCentralesGen][Request]' );
   try {
-    const genCentrales = await cenService.getGenCentrales(params.fecha, params.limite, params.offset);
+    const genCentrales = await cenServiceCentral.getGenCentrales(params.fecha, params.limite, params.offset);
     console.log('[getCentralesGen][Res] ', genCentrales);
     res.status(200).json({data: genCentrales});
   } catch (err) {
@@ -33,7 +33,7 @@ exports.getCentralGen = async (req, res, next)  => {
 
   console.log('[getCentralGen][Request]' );
   try {
-    const genCentral = await cenService.getGenCentral(params.fecha, params.idcentral);
+    const genCentral = await cenServiceCentral.getGenCentral(params.fecha, params.idcentral);
     console.log('[getCentralGen][Res] ', genCentral);
     res.status(200).json({data: genCentral});
   } catch (err) {
