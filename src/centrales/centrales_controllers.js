@@ -1,3 +1,4 @@
+const { json } = require('express');
 const cenServiceCentral = require('../services/centrales');
 
 /**
@@ -28,17 +29,23 @@ exports.getCentralesGen = async (req, res)  => {
  * @param {string} idcentral IdCetral from infotecnica
  * @return  {object} HTTP status code - 200, 500.
  */
-exports.getCentralGen = async (req, res, next)  => {
+exports.getCentralGen = async (req, res)  => {
   const params = req.body;
 
   console.log('[getCentralGen][Request]' );
   try {
     const genCentral = await cenServiceCentral.getGenCentral(params.fecha, params.idcentral);
+    
+    if (genCentral === "") {
+      console.log('[getCentralGen][Error] ', genCentral);
+      return res.status(204).send({message: "Error from server CEN"});
+    }
+
     console.log('[getCentralGen][Res] ', genCentral);
-    res.status(200).json({data: genCentral});
+    return res.status(200).json({data: genCentral});
   } catch (err) {
     console.log('[getCentralGen][Error] ', err);
-    res.status(500).send({err});
+    return res.status(500).send({err});
   }
 };
 

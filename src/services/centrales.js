@@ -14,7 +14,6 @@ exports.getGenCentrales = async (fecha, limite, offset) => {
   let data;
   try { 
     await axios.get(`${URL_centrales}${AUTH_KEY}`, { params: params }).then(result => {
-      console.log(result);
       data = result.data;
     });
     return data;

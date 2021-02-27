@@ -3,10 +3,10 @@ const { AUTH_KEY } = require("../config/env");
 
 const URL_centrales_info = 'https://api-desarrolladores.coordinador.cl/infotecnica/v1/centrales.json/?auth_key='
 
-exports.getCentralInfo = async (idinfotecnica) => {
+exports.getCentralInfo = async (limite, offset, idinfotecnica) => {
   let params = {
-                "limite": 1,
-                "offset": 0,
+                "limite": limite,
+                "offset": offset,
                 "idinfotecnica": idinfotecnica,
                 "nombre": "",
                 "mnemotecnico": "",
